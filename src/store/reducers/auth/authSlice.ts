@@ -38,10 +38,12 @@ const authSlice = createSlice({
 			state.error = ''
 		},
 		[register.fulfilled.type]: (state, { payload }: PayloadAction<string>) => {
+			console.log(payload)
 			state.isLoading = false
 		},
 		[register.rejected.type]: (state, { payload }: PayloadAction<string>) => {
 			state.isLoading = false
+			// @ts-ignore
 			state.error = payload
 		},
 		[login.pending.type]: (state) => {
@@ -57,6 +59,7 @@ const authSlice = createSlice({
 		},
 		[login.rejected.type]: (state, { payload }: PayloadAction<string>) => {
 			state.isLoading = false
+			// @ts-ignore
 			state.error = payload
 		}
 	}
