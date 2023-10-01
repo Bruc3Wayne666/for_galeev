@@ -3,6 +3,7 @@ import Last from './Last'
 import Card from './Card'
 import Area from './Charts/Area.tsx'
 import Pie from './Charts/Pie.tsx'
+import Line from './Charts/Line.tsx'
 
 const Index = () => {
 	return (
@@ -24,7 +25,7 @@ const Index = () => {
 			>
 				<Statistics />
 			</Card>
-			<Card><Statistics /></Card>
+			<Card><Line /></Card>
 			<Card><Last /></Card>
 			<Card
 				className='
