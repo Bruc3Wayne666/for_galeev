@@ -52,7 +52,7 @@ const Nav = () => {
 										  `}>
 									{options[option as keyof typeof Option].icon}
 									<span
-										className='sm:hidden xl:inline-block ml-2'>{options[option].title}</span>
+										className='sm:hidden xl:inline-block ml-2'>{options[option as keyof typeof Option].title}</span>
 								</NavLink>
 							</li>
 						))
