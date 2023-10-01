@@ -1,6 +1,5 @@
-import React from 'react'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useActions } from '../../../store/hooks/useActions.ts'
 
 interface AuthForm {
@@ -11,13 +10,11 @@ interface AuthForm {
 
 const Form = () => {
 	const type = useParams().type || 'register'
-	const navigate = useNavigate()
 	const { register, login } = useActions()
 	const {
 		register: regField,
 		handleSubmit,
-		clearErrors,
-		reset,
+		// reset,
 		formState: { errors, isValid }
 	} = useForm<AuthForm>({
 		mode: 'onBlur',

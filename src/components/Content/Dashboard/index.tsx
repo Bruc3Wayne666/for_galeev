@@ -1,4 +1,3 @@
-import React from 'react'
 import Statistics from './Statisctics'
 import Last from './Last'
 import Card from './Card'

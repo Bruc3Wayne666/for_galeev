@@ -1,5 +1,3 @@
-import React from 'react'
-
 // <div className='mt-12 text-white w-96 rounded-3xl
 // bg-gradient-to-tl from-orange-500 to-violet-400 p-1
 // '>

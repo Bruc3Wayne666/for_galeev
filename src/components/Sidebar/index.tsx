@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Nav from './Nav'
 import { Switch } from '@headlessui/react'
 import { useActions } from '../../store/hooks/useActions.ts'

@@ -1,4 +1,3 @@
-import React from 'react'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import { Navigate } from 'react-router'

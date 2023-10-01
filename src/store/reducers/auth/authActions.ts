@@ -9,6 +9,7 @@ export const register = createAsyncThunk(
 			// const { message } = await AuthAPI.register(credentials)
 			// return message
 			setTimeout(() => {
+				console.log(credentials)
 				return 'OK'
 			}, 1000)
 		} catch (e) {
@@ -26,6 +27,7 @@ export const login = createAsyncThunk(
 			// const { access_token } = await AuthAPI.login(credentials)
 			// return access_token
 			setTimeout(() => {
+				console.log(credentials)
 				return 'OK'
 			}, 1000)
 		} catch (e) {
