@@ -11,8 +11,8 @@ const stats = [
 
 const Statistics = () => {
 	return (
-		<div className='px-8 py-6 text-white w-96 border-2 rounded-3xl border-neutral-500'>
-			<div className='mb-6 text-4xl font-semibold'>
+		<>
+			<div className='xl:text-3xl 2xl:text-4xl mb-6  font-semibold'>
 				Statistics
 			</div>
 			<ul className='flex flex-col gap-3'>
@@ -33,7 +33,7 @@ const Statistics = () => {
 						))
 				}
 			</ul>
-		</div>
+		</>
 	)
 }
 

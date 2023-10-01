@@ -19,6 +19,7 @@ const authSlice = createSlice({
 	reducers: {
 		logout: (state) => {
 			localStorage.removeItem('isAuth')
+			localStorage.removeItem('token')
 			state.isLoading = false
 			state.error = ''
 			state.token = ''
@@ -52,6 +53,7 @@ const authSlice = createSlice({
 			localStorage.setItem('token', payload)
 			state.isLoading = false
 			state.token = payload
+			window.location.href = '/'
 		},
 		[login.rejected.type]: (state, { payload }: PayloadAction<string>) => {
 			state.isLoading = false

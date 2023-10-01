@@ -1,19 +1,20 @@
 import React from 'react'
 
-
+// <div className='mt-12 text-white w-96 rounded-3xl
+// bg-gradient-to-tl from-orange-500 to-violet-400 p-1
+// '>
+// <div className='
+// bg-gray-950
+// px-7 py-5
+// rounded-[20px]
+// '>
 const Last = () => {
 	return (
-		<div className='mt-12 text-white w-96 rounded-3xl
-			bg-gradient-to-tl from-orange-500 to-violet-400 p-1
-		'>
-			<div className='
-			bg-gray-950
-			px-7 py-5
-			rounded-[20px]
-			'>
+		<>
+			<div>
 				<div className='
 		bg-gradient-to-tl from-orange-500 to-violet-400 bg-clip-text text-transparent
-			mb-6 text-4xl font-semibold
+			mb-6 xl:text-3xl 2xl:text-4xl font-semibold
 			'>
 					Last Token
 				</div>
@@ -26,7 +27,7 @@ const Last = () => {
 					Transaction Time: <span className='ml-auto'>Sep 09, 2020</span>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

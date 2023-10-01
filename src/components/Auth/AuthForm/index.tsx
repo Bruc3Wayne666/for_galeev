@@ -1,8 +1,7 @@
 import React from 'react'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useActions } from '../../../store/hooks/useActions.ts'
-import { useAppSelector } from '../../../store/hooks/redux.ts'
 
 interface AuthForm {
 	username: string
@@ -11,10 +10,8 @@ interface AuthForm {
 }
 
 const Form = () => {
-	const { pathname } = useLocation()
+	const type = useParams().type || 'register'
 	const navigate = useNavigate()
-	const type = pathname.split('/')[2]
-	const { token } = useAppSelector(state => state.authSlice)
 	const { register, login } = useActions()
 	const {
 		register: regField,
@@ -41,12 +38,10 @@ const Form = () => {
 		console.log(data)
 	}
 
-	if (token) navigate('/workspace', { replace: true })
-
 	return (
 		<form
 			onSubmit={handleSubmit(submit, error)}
-			className='bg-gray-900 py-12 px-8 rounded-2xl relative mx-auto top-1/2 -translate-y-1/2 w-[600px] bg-yellow-50'>
+			className='bg-gray-900 dark:bg-gray-900 py-12 px-8 rounded-2xl relative mx-auto top-1/2 -translate-y-1/2 w-[600px] bg-yellow-50'>
 			{
 				type === 'register' &&
 				<>
@@ -95,7 +90,7 @@ const Form = () => {
 								// onClick={() => setType('login')}
 								className='mt-5 cursor-pointer text-green-300'
 							>
-								<Link to='register'>
+								<Link to='/auth/register' replace>
 									Sign Up now!
 								</Link>
 							</span>
@@ -106,7 +101,7 @@ const Form = () => {
 								// onClick={() => setType('register')}
 								className='mt-5 cursor-pointer text-green-400'
 							>
-								<Link to='login'>
+								<Link to='/auth/login' replace>
 								Sign In!
 								</Link>
 							</span>
