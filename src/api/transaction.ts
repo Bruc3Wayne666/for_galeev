@@ -52,7 +52,8 @@ export class TransactionAPI {
 	}
 
 	static async get(params: GetTransactionParams) {
-		const { data } = await instance.get<GetTransactionResponse>('transaction/get/topup', params)
+		console.log(params)
+		const { data } = await instance.get<GetTransactionResponse>('transaction/get/topup')
 		return data
 	}
 }
