@@ -8,10 +8,7 @@ export const register = createAsyncThunk(
 		try {
 			// const { message } = await AuthAPI.register(credentials)
 			// return message
-			setTimeout(() => {
-				console.log(credentials)
-				return 'OK'
-			}, 1000)
+			return 'ok'
 		} catch (e) {
 			const err: AxiosError<RegisterFailed> = e as any
 			if (!err.response) throw err
@@ -26,10 +23,7 @@ export const login = createAsyncThunk(
 		try {
 			// const { access_token } = await AuthAPI.login(credentials)
 			// return access_token
-			setTimeout(() => {
-				console.log(credentials)
-				return 'OK'
-			}, 1000)
+			return 'ok'
 		} catch (e) {
 			const err: AxiosError<LoginFailed> = e as any
 			if (!err.response) throw err

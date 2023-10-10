@@ -1,9 +1,15 @@
 import { combineReducers } from 'redux'
-import authSlice from './reducers/auth/authSlice.ts'
 import { configureStore } from '@reduxjs/toolkit'
+import authSlice from './reducers/auth/authSlice.ts'
+import packetSlice from './reducers/packet/packetSlice.ts'
+import userSlice from './reducers/user/userSlice.ts'
+import transactionSlice from './reducers/transaction/transactionSlice.ts'
 
 const rootReducer = combineReducers({
-	authSlice
+	authSlice,
+	packetSlice,
+	userSlice,
+	transactionSlice
 })
 
 export const setupStore = () => {

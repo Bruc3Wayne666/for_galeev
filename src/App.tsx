@@ -3,6 +3,9 @@ import Sidebar from './components/Sidebar'
 import { Navigate } from 'react-router'
 import Dashboard from './components/Content/Dashboard'
 import Auth from './pages/Auth'
+import Purchase from './components/Content/Purchase'
+import Transactions from './components/Content/Transactions'
+import Wallet from './components/Content/Wallet'
 
 
 const WorkspaceLayout = () => {
@@ -32,11 +35,15 @@ const privateRoutes = [
 	},
 	{
 		path: 'wallet',
-		element: <h1 className='text-white'>wallet</h1>
+		element: <Wallet />
 	},
 	{
 		path: 'purchase',
-		element: <h1 className='text-white'>purchase</h1>
+		element: <Purchase />
+	},
+	{
+		path: 'transactions',
+		element: <Transactions />
 	},
 	{
 		path: 'settings',

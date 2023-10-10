@@ -3,7 +3,7 @@ import { DividendsIcon, TotalIcon } from './icons.tsx'
 
 const stats = [
 	{ title: 'Dividends', icon: DividendsIcon },
-	{ title: 'Total Coins', icon: TotalIcon }
+	{ title: 'Balance', icon: TotalIcon }
 ]
 {/*linear-gradient(to left top, rgb(251, 113, 133), rgb(124, 45, 18), rgb(0, 0, 0))*/
 }
@@ -11,7 +11,7 @@ const stats = [
 const Statistics = () => {
 	return (
 		<>
-			<div className='xl:text-3xl 2xl:text-4xl mb-6  font-semibold'>
+			<div className='xl:text-3xl 2xl:text-4xl mb-6 font-semibold'>
 				Statistics
 			</div>
 			<ul className='flex flex-col gap-3'>

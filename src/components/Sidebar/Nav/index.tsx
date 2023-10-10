@@ -1,4 +1,4 @@
-import { HomeIcon, PurchaseIcon, SettingsIcon, WalletIcon } from './Icons'
+import { HomeIcon, PurchaseIcon, SettingsIcon, TransactionIcon, WalletIcon } from './Icons'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ReactNode } from 'react'
 
@@ -13,6 +13,11 @@ const options: Option[] = [
 		title: 'Home',
 		path: 'dashboard',
 		icon: <HomeIcon />
+	},
+	{
+		title: 'Transactions',
+		path: 'transactions',
+		icon: <TransactionIcon />
 	},
 	{
 		title: 'My Wallet',
