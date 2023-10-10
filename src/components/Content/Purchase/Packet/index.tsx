@@ -32,7 +32,7 @@ const CrossIcon = () => <svg xmlns='http://www.w3.org/2000/svg' fill='none' view
 
 const Packet: FC<PacketProps> = props => {
 	const {
-		id,
+		// id,
 		is_every_day_withdrawal,
 		time,
 		max_sum,

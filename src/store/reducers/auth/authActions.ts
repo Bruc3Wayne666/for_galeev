@@ -6,6 +6,7 @@ export const register = createAsyncThunk(
 	'auth/register',
 	async (credentials: RegisterCredentials, { rejectWithValue }) => {
 		try {
+			console.log(credentials)
 			// const { message } = await AuthAPI.register(credentials)
 			// return message
 			return 'ok'
@@ -21,6 +22,7 @@ export const login = createAsyncThunk(
 	'auth/login',
 	async (credentials: LoginCredentials, { rejectWithValue }) => {
 		try {
+			console.log(credentials)
 			// const { access_token } = await AuthAPI.login(credentials)
 			// return access_token
 			return 'ok'

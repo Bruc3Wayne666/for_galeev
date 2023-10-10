@@ -11,11 +11,11 @@ interface PacketProps {
 
 const Packet: FC<PacketProps> = props => {
 	const {
-		id,
-		is_every_day_withdrawal,
-		time,
-		max_sum,
-		min_sum,
+		// id,
+		// is_every_day_withdrawal,
+		// time,
+		// max_sum,
+		// min_sum,
 		name
 	} = props
 	return (

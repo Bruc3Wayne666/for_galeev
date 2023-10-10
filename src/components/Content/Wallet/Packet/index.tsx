@@ -17,8 +17,8 @@ const Packet: FC<PacketProps> = props => {
 		id,
 		packet_id,
 		status,
-		sum,
-		user_id
+		sum
+		// user_id
 	} = props
 
 	return (

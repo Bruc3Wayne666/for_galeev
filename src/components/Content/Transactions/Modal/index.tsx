@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 
 
 const DollarIcon = () => <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
@@ -18,7 +18,7 @@ const Modal: FC<ModalProps> = ({ setShowModal }) => {
 	return (
 		<div className='fixed flex top-0 left-0 right-0 bottom-0 filter backdrop-brightness-50 p-22'>
 
-			<div className='relative m-auto bg-gray-800 p-12 rounded-3xl text-white w-1/3 min-h-1/3'>
+			<div className='relative m-auto bg-gray-800 p-12 rounded-3xl text-white min-w-[480px] w-1/3 min-h-1/3'>
 
 				{
 					step === 'create'

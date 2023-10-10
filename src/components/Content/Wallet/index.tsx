@@ -1,5 +1,4 @@
 import Packet from './Packet'
-import React from 'react'
 
 const investments_list = [
 	{
