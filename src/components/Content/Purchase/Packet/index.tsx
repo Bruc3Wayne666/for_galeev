@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { ChangeEvent, FC, FormEventHandler, useState } from 'react'
 import { useActions } from '../../../../store/hooks/useActions.ts'
 import { useAppSelector } from '../../../../store/hooks/redux.ts'
 
@@ -46,7 +46,7 @@ const Packet: FC<PacketProps> = props => {
 	const { buyPacket } = useActions()
 	const { user } = useAppSelector(state => state.userSlice)
 
-	const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault()
 		if (user.balance >= value) buyPacket({ id, sum: value })
 	}

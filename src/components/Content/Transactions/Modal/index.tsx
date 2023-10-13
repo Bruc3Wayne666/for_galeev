@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { ChangeEvent, FC, FormEventHandler, useState } from 'react'
 import { useActions } from '../../../../store/hooks/useActions.ts'
 import { useAppSelector } from '../../../../store/hooks/redux.ts'
 
@@ -17,9 +17,9 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({ setShowModal }) => {
 	const [step, setStep] = useState('create')
 	const [value, setValue] = useState(0)
-	const { createTransaction, commitTransaction, getTransactions } = useActions()
+	const { createTransaction, commitTransaction } = useActions()
 	const { committing, isLoading } = useAppSelector(state => state.transactionSlice)
-	const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		if (step === 'create') {
 			e.preventDefault()
 			createTransaction({ sum: value })
