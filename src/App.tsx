@@ -7,7 +7,6 @@ import Purchase from './components/Content/Purchase'
 import Transactions from './components/Content/Transactions'
 import Wallet from './components/Content/Wallet'
 
-
 const WorkspaceLayout = () => {
 	if (!localStorage.getItem('isAuth')) {
 		return <Navigate to='auth' />

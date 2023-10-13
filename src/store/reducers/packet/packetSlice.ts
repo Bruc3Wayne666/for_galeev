@@ -27,12 +27,28 @@ const packetSlice = createSlice({
 			state.isLoading = false
 			state.packets = payload.packets
 		},
+		[getPackets.rejected.type]: (state) => {
+			state.isLoading = false
+			localStorage.removeItem('isAuth')
+			localStorage.removeItem('token')
+			state.isLoading = false
+			state.error = ''
+			window.location.href = '/'
+		},
 		[buyPacket.pending.type]: (state) => {
 			state.isLoading = true
 			state.error = ''
 		},
 		[buyPacket.fulfilled.type]: (state) => {
 			state.isLoading = false
+		},
+		[buyPacket.rejected.type]: (state) => {
+			state.isLoading = false
+			localStorage.removeItem('isAuth')
+			localStorage.removeItem('token')
+			state.isLoading = false
+			state.error = ''
+			window.location.href = '/'
 		}
 	}
 })

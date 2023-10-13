@@ -1,5 +1,4 @@
-import { instance } from './index.ts'
-
+import instance from './index.ts'
 
 export interface Packet {
 	id: number

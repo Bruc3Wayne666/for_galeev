@@ -1,4 +1,6 @@
-import { FC } from 'react'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { useActions } from '../../../../store/hooks/useActions.ts'
+import { useAppSelector } from '../../../../store/hooks/redux.ts'
 
 interface PacketProps {
 	id: number
@@ -32,15 +34,32 @@ const CrossIcon = () => <svg xmlns='http://www.w3.org/2000/svg' fill='none' view
 
 const Packet: FC<PacketProps> = props => {
 	const {
-		// id,
+		id,
 		is_every_day_withdrawal,
 		time,
 		max_sum,
 		min_sum,
 		name
 	} = props
+
+	const [value, setValue] = useState(0)
+	const { buyPacket } = useActions()
+	const { user } = useAppSelector(state => state.userSlice)
+
+	const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+		e.preventDefault()
+		if (user.balance >= value) buyPacket({ id, sum: value })
+	}
+
+	const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+		const val = Number(e.target.value)
+		if (val >= 0) setValue(val)
+	}
+
 	return (
-		<div className='flex flex-col h-[80%] grow rounded-3xl p-6 text-white text-xl border-2 border-neutral-500'>
+		<form
+			onSubmit={handleSubmit}
+			className='flex flex-col h-[80%] grow rounded-3xl p-6 text-white text-xl border-2 border-neutral-500'>
 			<div className='mb-10'>
 				<div className='text-4xl font-bold mb-3'>
 					{name}
@@ -83,17 +102,22 @@ const Packet: FC<PacketProps> = props => {
 							<input
 								className='px-2 outline-none w-full bg-transparent'
 								type='number'
-								value={0}
+								value={value || ''}
+								placeholder='0'
+								onChange={handleChangeValue}
 							/>
 							USD
 						</div>
 					</label>
 				</div>
 				<div className=''>
-					<button className='w-full bg-blue-900 rounded-3xl py-2'>Invest</button>
+					<button
+						disabled={(value > 100) || (value < 10) || (user.balance === 0) || (user.balance < value)}
+						className='transition duration-200 disabled:bg-gray-400 w-full bg-blue-900 rounded-3xl py-2'>Invest
+					</button>
 				</div>
 			</div>
-		</div>
+		</form>
 	)
 }
 

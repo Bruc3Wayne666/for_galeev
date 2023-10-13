@@ -1,14 +1,14 @@
 import { DividendsIcon, TotalIcon } from './icons.tsx'
+import { useAppSelector } from '../../../../store/hooks/redux.ts'
 
 
-const stats = [
-	{ title: 'Dividends', icon: DividendsIcon },
-	{ title: 'Balance', icon: TotalIcon }
-]
-{/*linear-gradient(to left top, rgb(251, 113, 133), rgb(124, 45, 18), rgb(0, 0, 0))*/
+const icons = {
+	dividends: <DividendsIcon />,
+	balance: <TotalIcon />
 }
 
 const Statistics = () => {
+	const { user } = useAppSelector(state => state.userSlice)
 	return (
 		<>
 			<div className='xl:text-3xl 2xl:text-4xl mb-6 font-semibold'>
@@ -16,20 +16,22 @@ const Statistics = () => {
 			</div>
 			<ul className='flex flex-col gap-3'>
 				{
-					stats
-						.map(({ title, icon }) => (
-							<li>
-								<div className='flex items-center'>
-									{icon()}
-									<div
-										className='flex items-center flex-grow ml-2 text-gray-400'
-									>
-										{title}
-										<span className='ml-auto text-2xl font-bold text-green-600'>0</span>
+					Object.keys(user)
+						.map(key => (
+								<li>
+									<div className='flex items-center'>
+										{icons[key as keyof typeof icons] || '_'}
+										<div
+											className='flex items-center flex-grow ml-2 text-gray-400'
+										>
+											{key}
+											<span
+												className='ml-auto text-2xl font-bold text-green-600'>{user[key as keyof typeof user]}</span>
+										</div>
 									</div>
-								</div>
-							</li>
-						))
+								</li>
+							)
+						)
 				}
 			</ul>
 		</>

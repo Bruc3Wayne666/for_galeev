@@ -1,4 +1,6 @@
-import { FC, useState } from 'react'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { useActions } from '../../../../store/hooks/useActions.ts'
+import { useAppSelector } from '../../../../store/hooks/redux.ts'
 
 
 const DollarIcon = () => <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' strokeWidth={1.5}
@@ -14,11 +16,30 @@ interface ModalProps {
 
 const Modal: FC<ModalProps> = ({ setShowModal }) => {
 	const [step, setStep] = useState('create')
+	const [value, setValue] = useState(0)
+	const { createTransaction, commitTransaction, getTransactions } = useActions()
+	const { committing, isLoading } = useAppSelector(state => state.transactionSlice)
+	const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+		if (step === 'create') {
+			e.preventDefault()
+			createTransaction({ sum: value })
+			return setStep('confirm')
+		}
+		commitTransaction({ topup_id: committing.payment_id })
+		setShowModal(false)
+	}
+
+	const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+		const val = Number(e.target.value)
+		if (val >= 0) setValue(val)
+	}
 
 	return (
 		<div className='fixed flex top-0 left-0 right-0 bottom-0 filter backdrop-brightness-50 p-22'>
 
-			<div className='relative m-auto bg-gray-800 p-12 rounded-3xl text-white min-w-[480px] w-1/3 min-h-1/3'>
+			<form
+				onSubmit={handleSubmit}
+				className='relative m-auto bg-gray-800 p-12 rounded-3xl text-white min-w-[480px] w-1/3 min-h-1/3'>
 
 				{
 					step === 'create'
@@ -35,7 +56,9 @@ const Modal: FC<ModalProps> = ({ setShowModal }) => {
 										<input
 											className='px-2 outline-none w-full bg-transparent'
 											type='number'
-											value={0}
+											value={value || ''}
+											placeholder='0'
+											onChange={handleChangeValue}
 										/>
 										USD
 									</div>
@@ -47,23 +70,28 @@ const Modal: FC<ModalProps> = ({ setShowModal }) => {
 										className='bg-red-600 px-6 py-3 rounded-3xl text-xl text-white font-semibold'
 								>Cancel
 								</button>
-								<button onClick={() => setStep('confirm')}
-										className='bg-blue-600 px-6 py-3 rounded-3xl text-xl text-white font-semibold'
+								<button
+									disabled={(value > 100) || (value < 10)}
+									type='submit'
+									className='transition duration-200 disabled:bg-gray-400 bg-blue-600 px-6 py-3 rounded-3xl text-xl text-white font-semibold'
 								>Create
 								</button>
 							</div>
-						</> : <>
-							<div className='text-2xl font-semibold mb-8'>
-								Deliver money to defined wallet
-							</div>
-							<div className='text-xl text-yellow-400'>[address]</div>
-							<div className='flex justify-end'>
-								<button onClick={() => setShowModal(false)}
-										className='bg-green-600 px-6 py-3 rounded-3xl text-xl text-white font-semibold'
-								>Done
-								</button>
-							</div>
-						</>
+						</> :
+						isLoading ? <><p className='text-white'>LOLO</p></>
+							:
+							<>
+								<div className='text-2xl font-semibold mb-8'>
+									Deliver money to defined wallet
+								</div>
+								<div className='text-xl text-yellow-400'>{committing.payment_data}</div>
+								<div className='flex justify-end'>
+									<button type='submit'
+											className='bg-green-600 px-6 py-3 rounded-3xl text-xl text-white font-semibold'
+									>Done
+									</button>
+								</div>
+							</>
 				}
 
 
@@ -71,7 +99,7 @@ const Modal: FC<ModalProps> = ({ setShowModal }) => {
 					onClick={() => setShowModal(false)}
 					className='absolute top-4 right-4 cursor-pointer text-xl font-semibold'>&times;
 				</div>
-			</div>
+			</form>
 
 		</div>
 	)

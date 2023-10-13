@@ -1,105 +1,16 @@
 import Packet from './Packet'
+import { useAppSelector } from '../../../store/hooks/redux.ts'
+import { useEffect } from 'react'
+import { useActions } from '../../../store/hooks/useActions.ts'
 
-const investments_list = [
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	},
-	{
-		'day_left': 21,
-		'dividends': 20,
-		'id': 1,
-		'packet_id': 1,
-		'status': 'active',
-		'sum': 20,
-		'user_id': 1
-	}
-]
 
 const Wallet = () => {
-	// const {} = useAppSelector(state => state.transactionSlice)
-	// const { getTransactions } = useActions()
-	//
-	// useEffect(() => {
-	// 	getTransactions()
-	// }, [])
+	const { investments_list } = useAppSelector(state => state.userSlice)
+	const { getUserPackets } = useActions()
+
+	useEffect(() => {
+		getUserPackets()
+	}, [])
 
 	return (
 		<div className='
@@ -119,8 +30,14 @@ const Wallet = () => {
 				</thead>
 				<tbody className='w-full'>
 				{
-					investments_list
-						.map(investment => <Packet {...investment} />)
+					investments_list.length > 0
+						? investments_list
+							.map(investment => <Packet {...investment} />)
+						:
+						<div className='h-full flex items-center justify-center text-xl text-neutral-500'>There are no
+							investments
+							yet
+						</div>
 				}
 				</tbody>
 			</table>

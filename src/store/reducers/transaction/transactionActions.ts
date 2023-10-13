@@ -30,9 +30,20 @@ export const commitTransaction = createAsyncThunk(
 
 export const getTransactions = createAsyncThunk(
 	'user/getTransactions',
+	async (_, { rejectWithValue }) => {
+		try {
+			return await TransactionAPI.get()
+		} catch (e) {
+			return rejectWithValue(e)
+		}
+	}
+)
+
+export const getTransaction = createAsyncThunk(
+	'user/getTransaction',
 	async (params: GetTransactionParams, { rejectWithValue }) => {
 		try {
-			return await TransactionAPI.get(params)
+			return await TransactionAPI.getOne(params)
 		} catch (e) {
 			return rejectWithValue(e)
 		}

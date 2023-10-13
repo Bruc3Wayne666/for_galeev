@@ -3,10 +3,17 @@ import Nav from './Nav'
 import { Switch } from '@headlessui/react'
 import { useActions } from '../../store/hooks/useActions.ts'
 import LogoutIcon from './Logout'
+import { useAppSelector } from '../../store/hooks/redux.ts'
 
 const Sidebar = () => {
+	const { user } = useAppSelector(state => state.userSlice)
 	const { logout } = useActions()
 	const [enabled, setEnabled] = useState(false)
+	const { getSelf } = useActions()
+
+	useEffect(() => {
+		getSelf()
+	}, [])
 
 	useEffect(() => {
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -33,7 +40,7 @@ const Sidebar = () => {
 					alt='PHOTO'
 				/>
 				<div className='text-lg text-amber-50'>
-					Bruce Wayne
+					{user.username}
 				</div>
 			</div>
 

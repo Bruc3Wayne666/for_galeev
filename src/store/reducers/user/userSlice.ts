@@ -29,12 +29,28 @@ const userSlice = createSlice({
 			state.isLoading = false
 			state.user = payload.user
 		},
+		[getSelf.rejected.type]: (state) => {
+			state.isLoading = false
+			localStorage.removeItem('isAuth')
+			localStorage.removeItem('token')
+			state.isLoading = false
+			state.error = ''
+			window.location.href = '/'
+		},
 		[updateUser.pending.type]: (state) => {
 			state.isLoading = true
 			state.error = ''
 		},
 		[updateUser.fulfilled.type]: (state) => {
 			state.isLoading = false
+		},
+		[updateUser.rejected.type]: (state) => {
+			state.isLoading = false
+			localStorage.removeItem('isAuth')
+			localStorage.removeItem('token')
+			state.isLoading = false
+			state.error = ''
+			window.location.href = '/'
 		},
 		[getUserPackets.pending.type]: (state) => {
 			state.isLoading = true
@@ -43,6 +59,14 @@ const userSlice = createSlice({
 		[getUserPackets.fulfilled.type]: (state, { payload }: PayloadAction<UserPacketsPayload>) => {
 			state.isLoading = false
 			state.investments_list = payload.investments_list
+		},
+		[getUserPackets.rejected.type]: (state) => {
+			state.isLoading = false
+			localStorage.removeItem('isAuth')
+			localStorage.removeItem('token')
+			state.isLoading = false
+			state.error = ''
+			window.location.href = '/'
 		}
 	}
 })

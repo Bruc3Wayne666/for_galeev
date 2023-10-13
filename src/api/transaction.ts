@@ -1,15 +1,15 @@
-import { instance } from './index.ts'
+import instance from './index.ts'
 
 export interface CreateTransactionParams {
 	sum: number
 }
 
 export interface CommitTransactionParams {
-	topup_id: number
+	topup_id: string
 }
 
 export interface GetTransactionParams {
-	topup_id: number
+	topup_id: string
 }
 
 export interface CreateTransactionResponse {
@@ -40,7 +40,17 @@ export interface GetTransactionResponse {
 	success: boolean
 }
 
+export interface GetTransactionsResponse {
+	topup: Topup[]
+	success: boolean
+}
+
 export class TransactionAPI {
+	static async get() {
+		const { data } = await instance.get<GetTransactionsResponse>('transaction/all')
+		return data
+	}
+
 	static async create(params: CreateTransactionParams) {
 		const { data } = await instance.put<CreateTransactionResponse>('transaction/create/topup', params)
 		return data
@@ -51,9 +61,8 @@ export class TransactionAPI {
 		return data
 	}
 
-	static async get(params: GetTransactionParams) {
-		console.log(params)
-		const { data } = await instance.get<GetTransactionResponse>('transaction/get/topup')
+	static async getOne(params: GetTransactionParams) {
+		const { data } = await instance.get<GetTransactionResponse>('transaction/get/topup', { params })
 		return data
 	}
 }
